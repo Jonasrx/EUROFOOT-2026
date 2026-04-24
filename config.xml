@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.jonas007.eurofoot" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Euro Foot 2026</name>
+    <description>Simulador de Futebol Jonas 007</description>
+    <author email="seuemail@exemplo.com">Jonas 007</author>
+    
+    <content src="index.html" />
+    
+    <icon src="icon.png" />
+    
+    <access origin="*" />
+    <preference name="Fullscreen" value="true" /> <preference name="Orientation" value="portrait" /> </widget>
