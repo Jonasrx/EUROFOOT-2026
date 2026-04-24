@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Euro Foot 2026 - Jonas 007 PRO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+<!-- ==============================
+     TELA DE SETUP (INÍCIO)
+============================== -->
+<div id="screen-setup" class="screen" style="background:#000;justify-content:center;align-items:center;overflow:hidden;">
+
+    <!-- Fundo com gradiente copa -->
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;
+        background:radial-gradient(ellipse at 50% 0%, rgba(197,160,89,0.15) 0%, transparent 70%),
+                   radial-gradient(ellipse at 50% 100%, rgba(0,80,0,0.3) 0%, transparent 70%);
+        pointer-events:none;z-index:0;"></div>
+
+    <!-- Estrelas decorativas -->
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
+        <div style="position:absolute;top:8%;left:15%;font-size:10px;color:rgba(197,160,89,0.3);animation:twinkle 3s infinite;">★</div>
+        <div style="position:absolute;top:12%;right:20%;font-size:14px;color:rgba(197,160,89,0.4);animation:twinkle 2s infinite 0.5s;">★</div>
+        <div style="position:absolute;top:5%;left:50%;font-size:8px;color:rgba(197,160,89,0.25);animation:twinkle 4s infinite 1s;">★</div>
+        <div style="position:absolute;top:18%;right:10%;font-size:10px;color:rgba(197,160,89,0.3);animation:twinkle 2.5s infinite 0.3s;">★</div>
+        <div style="position:absolute;top:22%;left:8%;font-size:12px;color:rgba(197,160,89,0.35);animation:twinkle 3.5s infinite 0.8s;">★</div>
+    </div>
+
+    <style>
+        @keyframes twinkle { 0%,100%{opacity:0.3} 50%{opacity:1} }
+        @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+        @keyframes slideUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    </style>
+
+    <div style="position:relative;z-index:1;width:90%;max-width:380px;text-align:center;animation:slideUp 0.8s ease;">
+
+        <!-- Troféu / bola -->
+        <div style="font-size:72px;margin-bottom:4px;animation:pulse 2s infinite;filter:drop-shadow(0 0 20px rgba(197,160,89,0.6));">🏆</div>
+
+        <!-- Título -->
+        <div style="font-size:32px;font-weight:900;letter-spacing:4px;
+            background:linear-gradient(135deg,#c5a059,#fff,#c5a059);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;margin-bottom:2px;">EURO FOOT</div>
+        <div style="font-size:48px;font-weight:900;letter-spacing:6px;
+            background:linear-gradient(135deg,#c5a059,#ffd700,#c5a059);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;line-height:1;margin-bottom:6px;">2026</div>
+
+        <!-- Badge -->
+        <div style="display:inline-block;background:rgba(197,160,89,0.15);border:1px solid rgba(197,160,89,0.4);
+            border-radius:20px;padding:4px 16px;margin-bottom:24px;">
+            <span style="color:#c5a059;font-size:11px;letter-spacing:2px;font-weight:bold;">JONAS 007 PRO EDITION</span>
+        </div>
+
+        <!-- Linha divisória -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+            <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(197,160,89,0.5));"></div>
+            <span style="color:rgba(197,160,89,0.6);font-size:12px;">⚽</span>
+            <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(197,160,89,0.5));"></div>
+        </div>
+
+        <!-- Input nome -->
+        <input type="text" id="input-coach" placeholder="✏️ Seu nome de treinador" maxlength="15"
+            style="width:100%;padding:15px;margin-bottom:16px;
+                background:rgba(255,255,255,0.05);
+                border:1px solid rgba(197,160,89,0.4);
+                color:#fff;border-radius:12px;font-size:15px;text-align:center;
+                outline:none;letter-spacing:1px;">
+
+        <!-- Botões -->
+        <div id="grid-teams" style="width:100%;"></div>
+
+        <!-- Rodapé -->
+        <div style="margin-top:20px;color:rgba(255,255,255,0.15);font-size:10px;letter-spacing:1px;">
+            SEASON 2026 • MANAGEMENT GAME
+        </div>
+    </div>
+</div>
+
+<!-- ==============================
+     TELA DO ESCRITÓRIO
+============================== -->
+<div id="screen-office" class="screen" style="display:none">
+    <div class="office-header">
+        <div class="header-top-info">
+            <div style="flex:1;min-width:0;">
+                <h1 id="txt-team-name">Time</h1>
+            </div>
+            <div class="bars-container" style="min-width:110px;">
+                <div class="bar-item">
+                    <span style="color:#aaa;font-size:10px;">Dir</span>
+                    <div class="bar-bg" id="bar-diretoria"><div class="bar-fill" style="width:70%;"></div></div>
+                    <span id="lbl-dir-pct" style="color:#aaa;font-size:10px;min-width:28px;text-align:right;">70%</span>
+                </div>
+                <div class="bar-item" style="margin-top:6px;">
+                    <span style="color:#aaa;font-size:10px;">Tor</span>
+                    <div class="bar-bg" id="bar-torcida"><div class="bar-fill" style="width:70%;"></div></div>
+                    <span id="lbl-tor-pct" style="color:#aaa;font-size:10px;min-width:28px;text-align:right;">70%</span>
+                </div>
+            </div>
+        </div>
+        <div class="coach-info">
+            <span id="txt-coach-display" style="color:#fff;">Jonas</span>
+            <span class="money-text" id="txt-money">R$ 500.000</span>
+        </div>
+    </div>
+
+    <div id="view-home" class="main-scroll-view" style="display:block">
+        <h4 class="section-label">ESQUEMA TÁTICO</h4>
+        <div id="tatic-selector" class="tatic-grid"></div>
+        <div id="desafio-card" style="margin:0 10px 8px;"></div>
+        <button class="btn-play-match" onclick="abrirPreJogo()" style="margin:10px auto;display:block;width:90%;">
+            JOGAR PRÓXIMA PARTIDA ⚽
+        </button>
+        <h4 class="section-label">TITULARES (11)</h4>
+        <div id="player-list-titulares"></div>
+        <h4 class="section-label">RESERVAS</h4>
+        <div id="player-list-reservas"></div>
+    </div>
+
+    <div id="view-tabela" class="main-scroll-view" style="display:none">
+        <div style="padding:10px;background:#111;">
+            <select id="select-liga-view" onchange="renderTable()"
+                style="width:100%;padding:10px;background:#000;color:#c5a059;border:1px solid #c5a059;border-radius:5px;font-weight:bold;">
+                <option value="COPA">🏆 COPA MUNDIAL</option>
+                <option value="E">🌍 LIGA EUROPA</option>
+                <option value="1">🇧🇷 SÉRIE A</option>
+                <option value="2">🇧🇷 SÉRIE B</option>
+                <option value="3">🇧🇷 SÉRIE C</option>
+                <option value="4" selected>🇧🇷 SÉRIE D</option>
+            </select>
+            <div style="display:flex;gap:5px;margin-top:6px;">
+                <button onclick="document.getElementById('select-liga-view').value=app.team.l;renderTable();"
+                    style="flex:1;background:#1a1a1a;color:var(--gold);border:1px solid #333;padding:8px;border-radius:5px;font-size:11px;font-weight:bold;cursor:pointer;">
+                    MEU TIME
+                </button>
+                <button onclick="document.getElementById('select-liga-view').value='COPA';renderTable();"
+                    style="flex:1;background:#1a1a1a;color:var(--gold);border:1px solid #333;padding:8px;border-radius:5px;font-size:11px;font-weight:bold;cursor:pointer;">
+                    🏆 COPA
+                </button>
+            </div>
+            <div style="padding:6px 2px;font-size:10px;color:#555;display:flex;gap:12px;">
+                <span><span style="color:#2ecc71;">⬆</span> Sobe de divisão</span>
+                <span><span style="color:#e74c3c;">⬇</span> Desce de divisão</span>
+                <span><span style="color:var(--gold);">●</span> Seu time</span>
+            </div>
+        </div>
+        <div style="padding:5px 10px;font-size:10px;color:#555;">
+            <span style="color:#2ecc71;">▏</span> Subida &nbsp;
+            <span style="color:#e74c3c;">▏</span> Descida
+        </div>
+        <table class="tab-liga">
+            <thead id="tabela-head">
+                <tr style="color:#c5a059;font-size:11px;">
+                    <th>#</th><th style="text-align:left">TIME</th><th>PTS</th><th>J</th><th>SG</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-body"></tbody>
+        </table>
+    </div>
+
+    <div id="view-mercado" class="main-scroll-view" style="display:none"></div>
+    <div id="view-config" class="main-scroll-view" style="display:none;padding:15px;"></div>
+
+    <div class="bottom-nav">
+        <button onclick="changeTab('home')"><div class="icon">🏠</div>Home</button>
+        <button onclick="changeTab('tabela')"><div class="icon">📊</div>Tabela</button>
+        <button onclick="changeTab('mercado')"><div class="icon">🛒</div>Mercado</button>
+        <button onclick="abrirNotificacoes()" style="position:relative;">
+            <div class="icon" style="position:relative;">🔔
+                <span id="sininho-badge" style="display:none;position:absolute;top:-6px;right:-6px;background:#f44336;color:#fff;font-size:9px;font-weight:900;min-width:16px;height:16px;border-radius:8px;align-items:center;justify-content:center;padding:0 3px;"></span>
+            </div>Avisos
+        </button>
+        <button onclick="changeTab('config')"><div class="icon">⚙️</div>Config</button>
+    </div>
+
+    <canvas id="fireworks-canvas" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99990;pointer-events:none;"></canvas>
+    <div id="boas-vindas-overlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99991;pointer-events:none;align-items:center;justify-content:center;flex-direction:column;">
+        <div id="boas-vindas-msg" style="background:rgba(0,0,0,0.85);border:2px solid var(--gold);border-radius:20px;padding:28px 32px;text-align:center;max-width:85vw;box-shadow:0 0 40px rgba(197,160,89,0.4);">
+            <div style="font-size:40px;margin-bottom:8px;">🎉</div>
+            <div id="boas-vindas-txt" style="color:var(--gold);font-size:20px;font-weight:900;"></div>
+            <div id="boas-vindas-sub" style="color:#fff;font-size:13px;margin-top:8px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ==============================
+     TELA DE PARTIDA
+============================== -->
+<div id="screen-match" class="screen" style="display:none">
+    <div class="match-header-live">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div id="m-half-txt">1º TEMPO | 0'</div>
+            <button id="btn-pause-match" onclick="pausarParaAlteracoes()"
+                style="background:#222;color:#c5a059;border:1px solid #c5a059;padding:5px 10px;border-radius:5px;font-size:10px;font-weight:bold;cursor:pointer;">
+                ⏸ PAUSA
+            </button>
+        </div>
+        <div class="match-teams-names">
+            <h2 id="m-home-name">Casa</h2>
+            <div id="s-box-color" class="score-box">0 - 0</div>
+            <h2 id="m-away-name">Fora</h2>
+        </div>
+        <div id="match-log" class="match-log"></div>
+    </div>
+
+    <!-- Seletor de formação FORA do scroll — sticky no topo -->
+    <div id="seletor-tatica-fixo" style="display:none;background:#0a0a0a;border-bottom:2px solid #c5a059;padding:10px;flex-shrink:0;z-index:10;">
+        <div style="color:#c5a059;font-size:11px;font-weight:bold;margin-bottom:8px;text-align:center;">📋 MUDAR FORMAÇÃO</div>
+        <div id="grid-taticas-fixo" style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px;"></div>
+    </div>
+    <div id="subs-screen" class="main-scroll-view" style="background:#000;"></div>
+
+    <div id="round-wrap-games" class="main-scroll-view" style="display:none;background:#000;">
+        <div id="live-round-list"></div>
+    </div>
+
+    <div class="match-footer" style="padding:10px;background:#000;border-top:1px solid #222;">
+        <button id="btn-continue" class="btn-play-match" onclick="goToMatch()">APITAR INÍCIO ▶</button>
+        <button id="btn-end" class="btn-play-match"
+            style="display:none;background:#c5a059;color:#000;"
+            onclick="finishMatch()">FINALIZAR RODADA ✅</button>
+    </div>
+</div>
+
+<!-- MODAL: LEILÃO RELÂMPAGO -->
+<div id="modal-leilao" class="screen"
+    style="display:none;background:rgba(0,0,0,0.93);z-index:100000;justify-content:center;align-items:center;">
+    <div style="width:90%;background:#111;border:2px solid var(--gold);border-radius:15px;padding:22px;text-align:center;box-shadow:0 0 30px rgba(197,160,89,0.4);">
+        <h2 style="color:var(--gold);margin-bottom:5px;letter-spacing:1px;">🔥 LEILÃO RELÂMPAGO!</h2>
+        <p style="font-size:12px;color:#aaa;margin-bottom:18px;">Um craque acabou de ficar disponível no mercado!</p>
+        <div id="leilao-card" style="background:#1a1a1a;padding:18px;border-radius:12px;margin-bottom:18px;border:1px solid #333;"></div>
+        <div style="background:#000;padding:14px;border-radius:10px;margin-bottom:18px;border:1px solid #222;">
+            <div style="font-size:11px;color:#888;text-transform:uppercase;margin-bottom:4px;">Lance Atual</div>
+            <div id="leilao-lance-valor" style="font-size:24px;color:#4caf50;font-weight:900;">R$ 0</div>
+            <div id="leilao-lance-dono" style="font-size:12px;color:#fff;margin-top:4px;font-style:italic;">Aguardando lances...</div>
+        </div>
+        <div id="leilao-contagem" style="color:#f44336;font-weight:bold;font-size:22px;margin-bottom:18px;">12s</div>
+        <button onclick="darLanceUsuario()"
+            style="width:100%;background:var(--gold);color:#000;border:none;padding:16px;border-radius:10px;font-weight:900;font-size:17px;cursor:pointer;">
+            DAR LANCE (+10%)
+        </button>
+        <button onclick="desistirLeilao()"
+            style="width:100%;background:#222;color:#e74c3c;border:1px solid #e74c3c;padding:11px;border-radius:10px;margin-top:10px;font-size:13px;font-weight:bold;cursor:pointer;">
+            DESISTIR
+        </button>
+    </div>
+</div>
+
+<!-- MODAL: BALANÇO DE TEMPORADA -->
+<div id="modal-temporada" class="screen"
+    style="display:none;background:rgba(0,0,0,0.96);z-index:10000;justify-content:center;align-items:center;">
+    <div style="width:95%;max-height:88vh;background:#080808;border:2px solid var(--gold);border-radius:20px;padding:20px;text-align:center;overflow-y:auto;">
+        <h2 style="color:var(--gold);margin-bottom:4px;font-size:20px;text-transform:uppercase;letter-spacing:2px;">📊 Balanço da Temporada</h2>
+        <p style="color:#555;font-size:11px;margin-bottom:18px;">Resultados oficiais — Subidas, Descidas e Copa</p>
+        <div id="lista-subidas-descidas" style="text-align:left;"></div>
+        <button onclick="fecharRelatorioTemporada()"
+            style="width:100%;background:var(--gold);color:#000;border:none;padding:16px;border-radius:12px;font-weight:900;margin-top:20px;font-size:15px;cursor:pointer;">
+            INICIAR NOVO ANO ▶
+        </button>
+    </div>
+</div>
+
+<script src="dados.js"></script>
+<script src="copa.js"></script>
+<script src="interface_core.js"></script>
+<script src="interface_match.js"></script>
+
+<script>
+// ── TOAST: usa o sistema do interface_core.js ──
+// Não redefine mostrarToast aqui para não conflitar
+</script>
+
+</body>
+</html>

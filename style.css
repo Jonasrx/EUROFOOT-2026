@@ -1,0 +1,487 @@
+/* ==============================
+   EURO FOOT 2026 — JONAS 007 PRO
+   style.css
+============================== */
+
+:root {
+    --bg:     #000;
+    --card:   #111;
+    --gold:   #c5a059;
+    --green:  #1b5e20;
+    --border: #333;
+    --text:   #fff;
+    --danger: #f44336;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* ==============================
+   SCREENS
+============================== */
+
+.screen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* ==============================
+   TOAST — pointer-events ATIVO para o X funcionar
+============================== */
+
+#toast-container {
+    pointer-events: all !important;
+    cursor: pointer;
+}
+
+#toast-x {
+    pointer-events: all !important;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.2);
+}
+
+/* Seletor de formação — garante que toque funciona */
+#seletor-tatica-fixo button {
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(197,160,89,0.3) !important;
+    pointer-events: all !important;
+    min-height: 40px;
+}
+
+/* ==============================
+   ESCRITÓRIO — HEADER
+============================== */
+
+.office-header {
+    background: #000;
+    padding: 15px 15px 10px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+#txt-team-name {
+    font-size: 22px;
+    margin: 0;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.bars-container {
+    flex-shrink: 0;
+}
+
+.bar-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: #aaa;
+}
+
+.bar-bg {
+    width: 70px;
+    height: 7px;
+    background: #222;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 4px;
+    transition: width 0.6s ease, background 0.4s;
+}
+
+.coach-info {
+    margin: 10px 0 0;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.money-text {
+    color: #4caf50;
+}
+
+/* ==============================
+   SCROLL VIEWS
+============================== */
+
+.main-scroll-view {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    padding-bottom: 90px;
+}
+
+.section-label {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: bold;
+    margin: 14px 0 7px 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==============================
+   CARDS DE JOGADORES
+============================== */
+
+.player-card,
+.sub-item,
+.player-item {
+    display: flex;
+    align-items: center;
+    background: var(--card);
+    border-bottom: 1px solid #222;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    position: relative;
+    min-height: 50px;
+}
+
+/* Cores de borda por posição */
+.pos-G,  .sub-G,  .pos-GOL, .sub-GOL              { border-left: 5px solid #f1c40f !important; }
+.pos-D,  .sub-D,  .pos-Z,   .sub-Z,
+.pos-ZAG,.sub-ZAG,.pos-LD,  .sub-LD,
+.pos-LE, .sub-LE, .pos-LAD, .sub-LAD,
+.pos-LAE,.sub-LAE                                  { border-left: 5px solid #3498db !important; }
+.pos-M,  .sub-M,  .pos-V,   .sub-V,
+.pos-VOL,.sub-VOL,.pos-MEI, .sub-MEI               { border-left: 5px solid #2ecc71 !important; }
+.pos-A,  .sub-A,  .pos-CA,  .sub-CA,
+.pos-PTE,.sub-PTE,.pos-PTD, .sub-PTD,
+.pos-ATA,.sub-ATA,.pos-CEN, .sub-CEN               { border-left: 5px solid #e74c3c !important; }
+
+.p-force {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: auto;
+    color: var(--gold);
+}
+
+/* ==============================
+   TELA DE PARTIDA
+============================== */
+
+.match-header-live {
+    background: #000;
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #222;
+    flex-shrink: 0;
+}
+
+.match-teams-names {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.match-teams-names h2 {
+    font-size: 15px;
+    flex: 1;
+    margin: 0;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.score-box {
+    border: 2px solid var(--danger);
+    border-radius: 10px;
+    font-size: 28px;
+    color: var(--danger);
+    font-weight: bold;
+    padding: 4px 18px;
+    min-width: 90px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.match-log {
+    background: #0a0a0a;
+    padding: 6px 8px;
+    font-size: 11px;
+    border-radius: 4px;
+    max-height: 55px;
+    overflow-y: auto;
+    color: #bbb;
+    border: 1px solid #1a1a1a;
+    margin-top: 8px;
+}
+
+/* ==============================
+   JOGOS DA RODADA
+============================== */
+
+.div-header {
+    background: #1a1a1a;
+    color: var(--gold);
+    padding: 7px 12px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 12px;
+    border-radius: 4px;
+    border-left: 3px solid var(--gold);
+}
+
+.match-line-j {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 10px;
+    border-bottom: 1px solid #111;
+    font-size: 13px;
+}
+
+.match-line-j span { flex: 1; }
+.match-line-j b    { color: var(--gold); min-width: 80px; text-align: center; }
+.match-line-j span:last-child { text-align: right; }
+
+/* ==============================
+   SUBSTITUIÇÕES EM COLUNAS
+============================== */
+
+.subs-grid  { display: flex; gap: 4px; }
+.sub-col    { flex: 1; width: 50%; }
+.col-title  {
+    color: var(--gold);
+    text-align: center;
+    font-size: 10px;
+    padding: 8px 0;
+    font-weight: bold;
+    background: #080808;
+    letter-spacing: 0.5px;
+}
+
+/* ==============================
+   BOTÕES E NAV
+============================== */
+
+.btn-play-match {
+    width: 100%;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.match-footer {
+    flex-shrink: 0;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: #111;
+    display: flex;
+    border-top: 1px solid #222;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.bottom-nav button {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 18px;
+    background: #fff;
+    color: #000;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+/* ==============================
+   TABELA
+============================== */
+
+.tab-liga {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tab-liga td {
+    padding: 11px 5px;
+    border-bottom: 1px solid #111;
+    text-align: center;
+    font-size: 13px;
+}
+
+.user-row {
+    background: rgba(197,160,89,0.15);
+    border-left: 3px solid var(--gold);
+}
+
+/* ==============================
+   ESTADO DOS CARDS
+============================== */
+
+.card-disabled {
+    opacity: 0.45;
+    filter: grayscale(0.7);
+    /* pointer-events mantido para permitir seleção */
+}
+
+.card-sel {
+    border: 1px solid var(--gold) !important;
+    background: #1a150e !important;
+}
+
+/* ==============================
+   SETUP INICIAL
+============================== */
+
+.setup-glass {
+    background: rgba(17,17,17,0.92);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+#grid-teams button {
+    transition: transform 0.2s, background 0.2s;
+}
+
+#grid-teams button:active {
+    transform: scale(0.95);
+}
+
+/* ==============================
+   SELETOR DE TÁTICAS
+============================== */
+
+.tatic-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    padding: 10px;
+    background: #0a0a0a;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid #1a1a1a;
+}
+
+.btn-tatic {
+    background: #1a1a1a;
+    color: #888;
+    border: 1px solid #333;
+    padding: 9px 2px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.btn-tatic.active {
+    background: var(--gold);
+    color: #000;
+    border-color: #fff;
+    box-shadow: 0 0 8px rgba(197,160,89,0.3);
+}
+
+.btn-tatic.locked {
+    opacity: 0.2;
+    cursor: not-allowed;
+    filter: grayscale(1);
+    border-style: dashed;
+}
+
+.btn-tatic:not(.locked):active {
+    transform: scale(0.9);
+}
+
+/* ==============================
+   BARRAS Dir/Tor
+============================== */
+
+.bar-bg:hover::after {
+    content: attr(data-val);
+    position: absolute;
+    background: #222;
+    color: var(--gold);
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    top: -18px;
+    left: 0;
+    white-space: nowrap;
+}
+
+/* ==============================
+   ANIMAÇÕES
+============================== */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.match-log > div {
+    animation: fadeIn 0.3s ease;
+}
+
+/* ==============================
+   SCROLLBAR
+============================== */
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
